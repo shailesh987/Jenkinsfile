@@ -11,13 +11,20 @@ pipeline {
   stages {
     stage('Checkout Code') {
       steps {
-        git url: 'https://github.com/shailesh987/Jenkinsfile.git'
+        git branch: 'main', 
+            url: 'https://github.com/shailesh987/Jenkinsfile'
       }
     }
 
     stage('Terraform Init') {
       steps {
-        bat 'terraform init'   // ← MUST BE ONLY THIS LINE
+        bat """
+          terraform init ^
+            -backend-config="subscription_id=%ARM_SUBSCRIPTION_ID%" ^
+            -backend-config="client_id=%ARM_CLIENT_ID%" ^
+            -backend-config="client_secret=%ARM_CLIENT_SECRET%" ^
+            -backend-config="tenant_id=%ARM_TENANT_ID%"
+        """
       }
     }
 
@@ -53,7 +60,11 @@ pipeline {
   }
 
   post {
-    success { echo '✅ Infrastructure provisioned successfully!' }
-    failure { echo '❌ Build failed. Check logs.' }
+    success {
+      echo '✅ Infrastructure provisioned successfully!'
+    }
+    failure {
+      echo '❌ Build failed. Check logs.'
+    }
   }
 }
