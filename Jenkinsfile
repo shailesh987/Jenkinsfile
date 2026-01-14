@@ -2,10 +2,10 @@ pipeline {
   agent any
 
   environment {
-    ARM_CLIENT_ID       = credentials('azure-client-id')       // use your real IDs
-    ARM_CLIENT_SECRET   = credentials('azure-client-secret')
-    ARM_TENANT_ID       = credentials('azure-tenant-id')
-    ARM_SUBSCRIPTION_ID = credentials('azure-subscription-id')
+    ARM_CLIENT_ID       = credentials('AZURE-CLIENT-ID')       // use your real IDs
+    ARM_CLIENT_SECRET   = credentials('AZURE-CLIENT-SECRET')
+    ARM_TENANT_ID       = credentials('AZURE_TENANT_ID')
+    ARM_SUBSCRIPTION_ID = credentials('AZURE_SUBSCRIPTION_ID')
   }
 
   stages {
@@ -26,7 +26,7 @@ pipeline {
         """
       }
     }
-    
+
 
     stage('Terraform Plan') {
       steps {
