@@ -2,8 +2,8 @@ pipeline {
   agent any
 
   environment {
-    ARM_CLIENT_ID       = credentials('AZURE-CLIENT-ID')       // use your real IDs
-    ARM_CLIENT_SECRET   = credentials('AZURE-CLIENT-SECRET')
+    ARM_CLIENT_ID       = credentials('AZURE_CLIENT_ID')       // use your real IDs
+    ARM_CLIENT_SECRET   = credentials('AZURE_CLIENT_SECRET')
     ARM_TENANT_ID       = credentials('AZURE_TENANT_ID')
     ARM_SUBSCRIPTION_ID = credentials('AZURE_SUBSCRIPTION_ID')
   }
