@@ -18,7 +18,7 @@ pipeline {
     stage('Terraform Init') {
       steps {
         bat """
-        terraform apply -auto-approve ^
+        terraform init -auto-approve ^
         -var "subscription_id=%ARM_SUBSCRIPTION_ID%" ^
         -var "client_id=%ARM_CLIENT_ID%" ^
         -var "client_secret=%ARM_CLIENT_SECRET%" ^
