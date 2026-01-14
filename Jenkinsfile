@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-    ARM_CLIENT_ID       = credentials('AZURE_CLIENT_ID')       // use your real IDs
+    ARM_CLIENT_ID       = credentials('AZURE_CLIENT_ID')
     ARM_CLIENT_SECRET   = credentials('AZURE_CLIENT_SECRET')
     ARM_TENANT_ID       = credentials('AZURE_TENANT_ID')
     ARM_SUBSCRIPTION_ID = credentials('AZURE_SUBSCRIPTION_ID')
@@ -11,22 +11,15 @@ pipeline {
   stages {
     stage('Checkout Code') {
       steps {
-        git url: 'https://github.com/shailesh987/Jenkinsfile.git'  // or your repo
+        git url: 'https://github.com/shailesh987/Jenkinsfile.git'  // your repo
       }
     }
 
     stage('Terraform Init') {
       steps {
-        bat """
-        terraform init -auto-approve ^
-        -var "subscription_id=%ARM_SUBSCRIPTION_ID%" ^
-        -var "client_id=%ARM_CLIENT_ID%" ^
-        -var "client_secret=%ARM_CLIENT_SECRET%" ^
-        -var "tenant_id=%ARM_TENANT_ID%" ^
-        """
+        bat 'terraform init'   // ← ONLY THIS! No flags, no variables
       }
     }
-
 
     stage('Terraform Plan') {
       steps {
