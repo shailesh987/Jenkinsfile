@@ -11,13 +11,13 @@ pipeline {
   stages {
     stage('Checkout Code') {
       steps {
-        git url: 'https://github.com/shailesh987/Jenkinsfile.git'  // your repo
+        git url: 'https://github.com/shailesh987/Jenkinsfile.git'
       }
     }
 
     stage('Terraform Init') {
       steps {
-        bat 'terraform init'   // ← ONLY THIS! No flags, no variables
+        bat 'terraform init'   // ← MUST BE ONLY THIS LINE
       }
     }
 
